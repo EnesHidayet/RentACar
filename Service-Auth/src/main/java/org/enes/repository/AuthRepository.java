@@ -1,6 +1,6 @@
-package repository;
+package org.enes.repository;
 
-import entity.Auth;
+import org.enes.entity.Auth;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface AuthRepository extends JpaRepository<Auth,Long> {
