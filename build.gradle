@@ -43,6 +43,9 @@ allprojects {
 
     dependencies {
         implementation          libs.springBootWeb
+        implementation          libs.lombok
+        annotationProcessor     libs.lombok
+        implementation          libs.openApi
     }
 }
 configurations {

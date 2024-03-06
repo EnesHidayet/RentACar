@@ -5,5 +5,7 @@ buildscript {
 }
 
 dependencies {
-
+    implementation       libs.springBootJpa
+    implementation       libs.postgresql
+    implementation       libs.springBootValidation
 }
