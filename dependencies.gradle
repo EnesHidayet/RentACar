@@ -4,6 +4,7 @@ ext{
             postgresql: "42.7.1",
             lombok: "1.18.30",
             openApi: "2.3.0",
+            mapStruct: "1.5.5.Final"
     ]
 
     libs =[
@@ -13,6 +14,7 @@ ext{
             lombok:                         "org.projectlombok:lombok:${versions.lombok}",
             postgresql:                     "org.postgresql:postgresql:${versions.postgresql}",
             openApi:                        "org.springdoc:springdoc-openapi-starter-webmvc-ui:${versions.openApi}",
-
+            mapStruct:                      "org.mapstruct:mapstruct:${versions.mapStruct}",
+            mapStructProcessor:             "org.mapstruct:mapstruct-processor:${versions.mapStruct}"
     ]
 }
