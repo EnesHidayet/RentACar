@@ -15,6 +15,7 @@ ext{
             postgresql:                     "org.postgresql:postgresql:${versions.postgresql}",
             openApi:                        "org.springdoc:springdoc-openapi-starter-webmvc-ui:${versions.openApi}",
             mapStruct:                      "org.mapstruct:mapstruct:${versions.mapStruct}",
-            mapStructProcessor:             "org.mapstruct:mapstruct-processor:${versions.mapStruct}"
+            mapStructProcessor:             "org.mapstruct:mapstruct-processor:${versions.mapStruct}",
+            springBootDataMongo:            "org.springframework.boot:spring-boot-starter-data-mongodb:${versions.springBoot}",
     ]
 }

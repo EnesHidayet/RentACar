@@ -1,3 +1,4 @@
 rootProject.name = 'RentACar'
 include 'Service-Auth'
+include 'Service-User'
 

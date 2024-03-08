@@ -1,0 +1,11 @@
+server:
+  port: 1011
+
+spring:
+  data:
+    mongodb:
+      host: localhost
+      port: 27021
+      username: bilgeUser
+      password: bilgeUser*
+      database: userdb
