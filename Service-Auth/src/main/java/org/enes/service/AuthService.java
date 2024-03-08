@@ -6,6 +6,8 @@ import org.enes.dto.Request.RegisterRequestDto;
 import org.enes.dto.Request.UpdatePasswordRequestDto;
 import org.enes.dto.Response.RegisterResponseDto;
 import org.enes.entity.Auth;
+import org.enes.exception.AuthManagerException;
+import org.enes.exception.ErrorType;
 import org.enes.mapper.AuthMapper;
 import org.enes.repository.AuthRepository;
 import org.enes.utility.ServiceManager;
@@ -26,6 +28,7 @@ public class AuthService extends ServiceManager<Auth, Long> {
     }
 
     public RegisterResponseDto register(RegisterRequestDto dto){
+
         Auth auth = mapper.fromRegisterRequestToAuth(dto);
         save(auth);
         return mapper.fromAuthToRegisterResponseDto(auth);
@@ -34,10 +37,10 @@ public class AuthService extends ServiceManager<Auth, Long> {
     public Boolean login(LoginRequestDto dto){
         Optional<Auth> auth = repository.findByUsernameAndPassword(dto.getUsername(), dto.getPassword());
         if (!auth.get().getStatus().equals(EStatus.ACTIVE)){
-            throw new RuntimeException("Auth not active");
+            throw new AuthManagerException(ErrorType.ACCOUNT_NOT_ACTIVE);
         }
         if (auth.isEmpty()){
-            throw new RuntimeException("Auth not found");
+            throw new AuthManagerException(ErrorType.LOGIN_ERROR);
         }
         return true;
     }
@@ -45,7 +48,10 @@ public class AuthService extends ServiceManager<Auth, Long> {
     public Boolean activateStatus(ActivationRequestDto dto){
         Optional<Auth> auth = repository.findByIdAndActivationCode(dto.getId(), dto.getActivationCode());
         if (auth.isEmpty()){
-            throw new RuntimeException("Auth not found");
+            throw new AuthManagerException(ErrorType.USER_NOT_FOUND);
+        }
+        if (!auth.get().getActivationCode().equals(dto.getActivationCode())){
+            throw new AuthManagerException(ErrorType.ACTIVATION_CODE_ERROR);
         }
         auth.get().setStatus(EStatus.ACTIVE);
         save(auth.get());
@@ -55,7 +61,7 @@ public class AuthService extends ServiceManager<Auth, Long> {
     public Boolean update(UpdatePasswordRequestDto dto){
         Optional<Auth> auth = repository.findByIdAndPassword(dto.getId(),dto.getOldPassword());
         if (auth.isEmpty()){
-            throw new RuntimeException("Auth not found");
+            throw new AuthManagerException(ErrorType.USER_NOT_FOUND);
         }
         auth.get().setPassword(dto.getNewPassword());
         save(auth.get());
@@ -66,7 +72,7 @@ public class AuthService extends ServiceManager<Auth, Long> {
     public Boolean delete (Long id){
         Optional<Auth> auth = findById(id);
         if (auth.isEmpty()){
-            throw new RuntimeException("Auth not found");
+            throw new AuthManagerException(ErrorType.USER_NOT_FOUND);
         }
         auth.get().setStatus(EStatus.DELETED);
         save(auth.get());
@@ -76,7 +82,7 @@ public class AuthService extends ServiceManager<Auth, Long> {
     public Optional<Auth> findByIdAuth(Long id){
         Optional<Auth> auth = findById(id);
         if (auth.isEmpty()){
-            throw new RuntimeException("Auth not found");
+            throw new AuthManagerException(ErrorType.USER_NOT_FOUND);
         }
         return auth;
     }

@@ -1,15 +1,7 @@
 
-b	java:S112%"FDefine and throw a dedicated exception instead of using a generic one.(ÊøÖ8£¬ùÅá1
-g	java:S112("FDefine and throw a dedicated exception instead of using a generic one.(¯çÄŠüÿÿÿÿ8£¬ùÅá1
-g	java:S1120"FDefine and throw a dedicated exception instead of using a generic one.(¯çÄŠüÿÿÿÿ8şÔùÅá1
-g	java:S112:"FDefine and throw a dedicated exception instead of using a generic one.(¯çÄŠüÿÿÿÿ8ÿÔùÅá1
-g	java:S112E"FDefine and throw a dedicated exception instead of using a generic one.(¯çÄŠüÿÿÿÿ8ÿÔùÅá1
-g	java:S112O"FDefine and throw a dedicated exception instead of using a generic one.(¯çÄŠüÿÿÿÿ8¾Ú¼Æá1
-q
-java:S1192("ODefine a constant instead of duplicating this literal "Auth not found" 5 times.(¯çÄŠüÿÿÿÿ8¥¬ùÅá1
 j
-java:S3655$"HCall "auth.isPresent()" or "!auth.isEmpty()" before accessing the value.(ÓÄä¼ûÿÿÿÿ8ä·»Æá1
+java:S3655'"HCall "auth.isPresent()" or "!auth.isEmpty()" before accessing the value.(ÓÄä¼ûÿÿÿÿ8¿üóîá1
 a
-java:S2583'"DChange this condition so that it does not always evaluate to "false"(İÆŞ¥8å·»Æá1
+java:S2583*"DChange this condition so that it does not always evaluate to "false"(İÆŞ¥8Àüóîá1
 >
-java:S1170"!Make this final field static too.(ãî¬¬8¸¬ùÅá1
+java:S1170"!Make this final field static too.(ãî¬¬8˜úšîá1
