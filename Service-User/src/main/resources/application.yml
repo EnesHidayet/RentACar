@@ -9,3 +9,8 @@ spring:
       username: bilgeUser
       password: bilgeUser*
       database: userdb
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: admin
+    password: root

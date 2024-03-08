@@ -26,7 +26,7 @@ public class UserService extends ServiceManager<UserProfile,String > {
     }
 
     public Boolean createUser(CreateUserRequestDto dto){
-        save(mapper.fromTo(dto));
+        save(mapper.fromCreateDtoToUserProfile(dto));
         return true;
     }
 

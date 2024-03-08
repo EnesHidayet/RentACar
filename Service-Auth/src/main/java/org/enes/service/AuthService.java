@@ -9,6 +9,7 @@ import org.enes.entity.Auth;
 import org.enes.exception.AuthManagerException;
 import org.enes.exception.ErrorType;
 import org.enes.mapper.AuthMapper;
+import org.enes.rabbitmq.producer.RegisterUserProducer;
 import org.enes.repository.AuthRepository;
 import org.enes.utility.ServiceManager;
 import org.enes.utility.enums.EStatus;
@@ -22,15 +23,21 @@ import java.util.Optional;
 public class AuthService extends ServiceManager<Auth, Long> {
     private final AuthRepository repository;
     private final AuthMapper mapper = AuthMapper.INSTANCE;
-    public AuthService(JpaRepository<Auth, Long> repository, AuthRepository repository1) {
+    private final RegisterUserProducer producer;
+    public AuthService(JpaRepository<Auth, Long> repository, AuthRepository repository1, RegisterUserProducer producer) {
         super(repository);
         this.repository = repository1;
+        this.producer = producer;
     }
 
     public RegisterResponseDto register(RegisterRequestDto dto){
 
-        Auth auth = mapper.fromRegisterRequestToAuth(dto);
-        save(auth);
+        Auth auth = save(mapper.fromRegisterRequestToAuth(dto));
+        try {
+            producer.sendNewUser(mapper.fromAuthToRegisterModel(auth));
+        }catch (Exception e){
+                throw new AuthManagerException(ErrorType.USER_NOT_CREATED);
+        }
         return mapper.fromAuthToRegisterResponseDto(auth);
     }
 
